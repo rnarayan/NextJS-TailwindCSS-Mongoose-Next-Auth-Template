@@ -1,5 +1,9 @@
-# This NextJs template use  MongoDB and Mongoose for database, Tailwind for CSS and NextAuth for login. 
+# This NextJs template uses  MongoDB and Mongoose for database, Tailwind for CSS and NextAuth for login. 
 
+This template is a combined project from following examples. 
+https://github.com/vercel/next.js/tree/canary/examples/with-mongodb-mongoose 
+https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss 
+https://github.com/vercel/next.js/tree/canary/examples/with-next-auth
 
 # MongoDB and Mongoose with Next.js
 
