@@ -1,8 +1,9 @@
-# This NextJs template use  MongoDB and Mongoose for database, Tailwind for CSS and NextAuth for login. 
+# This NextJs template uses  MongoDB and Mongoose for database, Tailwind for CSS and NextAuth for login. 
 
-
-# MongoDB and Mongoose with Next.js
-
+This template is a combined project from following examples.
+https://github.com/vercel/next.js/tree/canary/examples/with-mongodb-mongoose
+https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss
+https://github.com/vercel/next.js/tree/canary/examples/with-next-auth
 
 
 **Pet** is an application that allows users to add their pets' information (e.g., name, owner's name, diet, age, dislikes, likes, and photo). They can also delete it or edit it anytime.
