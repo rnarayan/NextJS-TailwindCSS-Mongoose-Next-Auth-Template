@@ -23,7 +23,7 @@ const options = {
   allowSignin: async (user, account) => {return true},
 
   pages: {
-    signin: './signin.js',  // Displays signin buttons
+    signin: '/auth/signin',  // Displays signin buttons /pages/auth/signin.js
   },
 
 

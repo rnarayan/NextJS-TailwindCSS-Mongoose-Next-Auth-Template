@@ -63,7 +63,9 @@ const NavbarLinks = () => (
 const NavbarSignIn = ({ session }) => (
     <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">
         <span className="inline-flex rounded-md shadow">
-            {!session && (<a href={`/api/auth/signin`}
+            {!session && (
+                // <a href={`/api/auth/signin`}
+                <a href={`/auth/signin`}
                 onClick={e => signin()}
                 className="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-600 bg-white hover:text-indigo-500 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-gray-50 active:text-indigo-700 transition duration-150 ease-in-out"
             > Sign in </a>)}
