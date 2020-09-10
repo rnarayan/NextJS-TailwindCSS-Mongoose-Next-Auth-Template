@@ -19,9 +19,9 @@ function MyApp({ Component, pageProps }) {
       </Head>
 
       <Layout>
-        <div className="grid wrapper">
+        {/* <div className="grid wrapper"> */}
           <Component {...pageProps} />
-        </div>
+        {/* </div> */}
       </Layout>
 
     </Provider>

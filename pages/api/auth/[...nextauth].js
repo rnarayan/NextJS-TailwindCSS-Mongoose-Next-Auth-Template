@@ -8,27 +8,29 @@ const options = {
       server: process.env.EMAIL_SERVER,
       from: process.env.EMAIL_FROM,
     }),
+    Providers.Google({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET
+    }),
     Providers.Facebook({
       clientId: process.env.FACEBOOK_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
     }),
+
   ],
- 
+
   database: process.env.DATABASE_URL,
 
-  session: {jwt: true},
+  session: { jwt: true },
 
   jwt: {},
 
-  allowSignin: async (user, account) => {return true},
+  allowSignin: async (user, account) => { return true },
 
-  pages: {
-    signin: '/auth/signin',  // Displays signin buttons /pages/auth/signin.js
-  },
+  // pages: { signin: '/auth/signin'},
 
+  events: { signIn: async (message) => { console.log('Signin:', message) } },
 
-  events: {signIn: async (message) => { console.log('Signin:',message)}},
-  
   callbacks: {
     /**
    * @param  {object} user     User object
@@ -37,15 +39,19 @@ const options = {
    * @return {boolean}         Return `true` (or a modified JWT) to allow sign in
    *                           Return `false` to deny access
    */
-    signIn: async (user, account, profile) => {return Promise.resolve(true)},
+    signIn: async (user, account, profile) => { return Promise.resolve(true) },
 
-    session: async (session, user,token) => {
+    redirect: async (url, baseUrl) => { return Promise.resolve(baseUrl) },
+
+    session: async (session, user, token) => {
       session.user.id = '12345'
       console.log('nextauth.js session', session)
       return Promise.resolve(session)
     },
-}
+  }
 }
 const Auth = (req, res) => NextAuth(req, res, options)
+
+console.log('Pages:', options.pages)
 
 export default Auth

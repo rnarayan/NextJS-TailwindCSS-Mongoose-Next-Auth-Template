@@ -1,6 +1,6 @@
 
 import Link from "next/link";
-import { signin, signout, useSession } from "next-auth/client"
+import {useSession } from "next-auth/client"
 import { Transition } from '@tailwindui/react'
 import { useState } from 'react'
 
@@ -11,13 +11,14 @@ const links = [
     { href: "/new", label: "Add Pet" },
 ]
 
+const nav = "relative pt-6 pb-12 lg:pb-20"
 
 const LandingNav = ({ children }) => {
     const [session, loading] = useSession()
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
     return (
-            <div className="relative pt-6 pb-12 lg:pb-20">
+            <div className={nav}>
                 <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
                     <nav className="relative flex items-center justify-between sm:h-10 md:justify-center">
                         <div className="flex items-center flex-1 md:absolute md:inset-y-0 md:left-0">
@@ -63,12 +64,15 @@ const NavbarLinks = () => (
 const NavbarSignIn = ({ session }) => (
     <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">
         <span className="inline-flex rounded-md shadow">
-            {!session && (
-                // <a href={`/api/auth/signin`}
+            {/* {!session && (
                 <a href={`/auth/signin`}
-                onClick={e => signin()}
-                className="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-600 bg-white hover:text-indigo-500 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-gray-50 active:text-indigo-700 transition duration-150 ease-in-out"
-            > Sign in </a>)}
+                   onClick={e => { e.preventDefault(); signin() }}
+                   className="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-600 bg-white hover:text-indigo-500 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-gray-50 active:text-indigo-700 transition duration-150 ease-in-out"
+            > Sign in </a>)} */}
+            {!session && (
+                <a href={`/auth/signin`}
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-600 bg-white hover:text-indigo-500 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-gray-50 active:text-indigo-700 transition duration-150 ease-in-out"
+                > Sign in </a>)}
         </span>
     </div>
 )
@@ -90,9 +94,15 @@ const MobileMenu = ({ session }) => (
 
 const MobileMenuSignIn = ({ session }) => (
     <div>
+        {/* {!session && (
+            <a href={`/auth/signin`}
+                onClick={e => { e.preventDefault(); signin()}}
+                className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100 hover:text-indigo-700 focus:outline-none focus:bg-gray-100 focus:text-indigo-700 transition duration-150 ease-in-out"
+            >Sign in</a>
+        )} */}
         {!session && (
-            <a href={`/api/auth/signin`}
-                onClick={e => signin()}
+            <a href={`/auth/signin`}
+                // onClick={() => signIn('google')}
                 className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100 hover:text-indigo-700 focus:outline-none focus:bg-gray-100 focus:text-indigo-700 transition duration-150 ease-in-out"
             >Sign in</a>
         )}
