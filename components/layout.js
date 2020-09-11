@@ -6,13 +6,13 @@ import { useSession } from "next-auth/client"
 const Layout = ({ children }) => {
   const [session, loading] = useSession()
 
-  return (    
-    <>
+  return (
+    <div className="container mx-auto sm:px-4">
       {/* <MiscHtml /> */}
-      {session &&  <AuthenticatedNav />}
+      {session && <AuthenticatedNav />}
       {!session && <LandingNav />}
       <div className="">{children}</div>
-    </>
+    </div>
   )
 }
 
