@@ -19,7 +19,13 @@ const options = {
 
   ],
 
-  database: process.env.DATABASE_URL,
+  // database: process.env.DATABASE_URL,
+  // DATABASE_URL=sqlite://localhost/:memory:?synchronize=true
+  database: {
+    type: "mongodb",
+    useNewUrlParser: true,
+    url: process.env.DATABASE_URL,
+  },
 
   session: { jwt: true },
 

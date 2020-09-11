@@ -1,6 +1,7 @@
 // import React from 'react'
 import { providers, signIn } from 'next-auth/client'
 import { csrfToken } from 'next-auth/client'
+console.log('csrfToken:', csrfToken)
 
 export default function SignIn({ providers }) {
     return (
@@ -65,8 +66,8 @@ const EmailSignin = () => {
                     {/* <div class="flex justify-between">
                                         <label for="email" class="block text-sm font-medium leading-5 text-gray-700">Email</label>
                                     </div> */}
-                    <div class="mt-1 relative rounded shadow-md">
-                        <input id="email" class="bg-gray-100 p-4 focus:bg-white form-input block w-full sm:text-sm sm:leading-5 appearance-none border" placeholder="you@example.com" aria-describedby="email-optional" />
+                    <div className="mt-1 relative rounded shadow-md">
+                        <input id="email" className="bg-gray-100 p-4 focus:bg-white form-input block w-full sm:text-sm sm:leading-5 appearance-none border" placeholder="you@example.com" aria-describedby="email-optional" />
                     </div>
                     <button type='submit'
                         className="flex justify-center items-center max-w-sm font-light hover:font-normal hover:bg-cool-gray-100 shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight mx-auto" type="button"
@@ -75,8 +76,8 @@ const EmailSignin = () => {
                         <EmailIcon />
                                         Sign in with Email
                                     </button>
-                    <p class="mt-1 hidden text-sm text-red-600" id="email-error">Your password must be less than 4 characters.</p>
-                    <p class="mt-1 text-sm text-gray-400">Signin through email is passwordless signin.</p>
+                    <p className="mt-1 hidden text-sm text-red-600" id="email-error">Your password must be less than 4 characters.</p>
+                    <p className="mt-1 text-sm text-gray-400">Signin through email is passwordless signin.</p>
 
                 </div>
 
