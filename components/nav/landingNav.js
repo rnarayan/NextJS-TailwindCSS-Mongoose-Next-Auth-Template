@@ -5,8 +5,8 @@ import { Transition } from '@tailwindui/react'
 import { useState } from 'react'
 
 const links = [
-    { href: "/", label: "Product" },
-    { href: "/new", label: "Features" },
+    { href: "/users/users", label: "Users" },
+    { href: "/users/newuser", label: "Add User" },
     { href: "/", label: "Home" },
     { href: "/new", label: "Add Pet" },
 ]

@@ -1,16 +1,13 @@
 // import React from 'react'
-import { providers, signIn } from 'next-auth/client'
-import { csrfToken } from 'next-auth/client'
-console.log('csrfToken:', csrfToken)
+import { providers, signIn,getCsrfToken } from 'next-auth/client'
 
-export default function SignIn({ providers }) {
+export default function SignIn({ providers, csrfToken }) {
     return (
         <div className='w-full' >
-
             <div className='font-bold text-center text-gray-600 text-lg py-2 px-1'>Custom Signin Page</div>
             {Object.values(providers).map(provider => (
                 <div key={provider.name}>
-                    {provider.name == "Email" ? <EmailSignin/> :
+                    {provider.name == "Email" ? <EmailSignin csrfToken={csrfToken}/> :
                         <form>
                             <button
                                 className="flex justify-center items-center max-w-sm font-light hover:font-normal hover:bg-cool-gray-100 shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight mx-auto" type="button"
@@ -19,11 +16,9 @@ export default function SignIn({ providers }) {
                                 {provider.name == "Google" ? <GoogleIcon /> : ""}
                                 {provider.name == "Facebook" ? <FBIcon /> : ""}
                                 <div>Sign in with {provider.name}</div>
-
                             </button>
                         </form>
                     }
-
                 </div>
             ))}
         </div>
@@ -31,13 +26,28 @@ export default function SignIn({ providers }) {
 }
 
 
-SignIn.getInitialProps = async (context) => {
-    return {
-        providers: await providers(context),
-        csrfToken: await csrfToken(context)
-    }
+const EmailSignin = ({csrfToken}) => {
+    return (
+        <>
+            <form method='post' action='/auth/signin/email'>
+                <div>
+                    <input name='csrfToken' type='hidden' defaultValue={csrfToken} />
+                    <div className="mt-1 relative rounded shadow-md">
+                        <input id="email" className="bg-gray-100 p-4 focus:bg-white form-input block w-full sm:text-sm sm:leading-5 appearance-none border" placeholder="you@example.com" aria-describedby="email-optional" />
+                    </div>
+                    <button type='submit'
+                        className="flex justify-center items-center max-w-sm font-light hover:font-normal hover:bg-cool-gray-100 shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight mx-auto" type="button"
+                        onClick={e => { e.preventDefault(); signIn('email', { email: 'rnarayan98@gmail.com' }) }}>
+                        <EmailIcon />Sign in with Email
+                    </button>
+                    <p className="mt-1 hidden text-sm text-red-600" id="email-error">Your password must be less than 4 characters.</p>
+                    <p className="mt-1 text-sm text-gray-400">Signin through email is passwordless signin.</p>
+                </div>
+            </form>
+            <hr className="max-w-sm mx-auto my-2" />
+        </>
+    )
 }
-
 
 const GoogleIcon = () =>
     <div className="flex-shrink-0 w-max-content pr-2">
@@ -54,35 +64,12 @@ const EmailIcon = () =>
         <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
             <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
             <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-        </svg>    </div>
+        </svg>
+    </div>
 
-const EmailSignin = () => {
-
-    return (
-        <>
-            <form method='post' action='/auth/signin/email'>
-                <div>
-                    <input name='csrfToken' type='hidden' defaultValue={csrfToken} />
-                    {/* <div class="flex justify-between">
-                                        <label for="email" class="block text-sm font-medium leading-5 text-gray-700">Email</label>
-                                    </div> */}
-                    <div className="mt-1 relative rounded shadow-md">
-                        <input id="email" className="bg-gray-100 p-4 focus:bg-white form-input block w-full sm:text-sm sm:leading-5 appearance-none border" placeholder="you@example.com" aria-describedby="email-optional" />
-                    </div>
-                    <button type='submit'
-                        className="flex justify-center items-center max-w-sm font-light hover:font-normal hover:bg-cool-gray-100 shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight mx-auto" type="button"
-                        onClick={e => { e.preventDefault(); signIn('email', { email: 'rnarayan98@gmail.com' }) }}
-                    >
-                        <EmailIcon />
-                                        Sign in with Email
-                                    </button>
-                    <p className="mt-1 hidden text-sm text-red-600" id="email-error">Your password must be less than 4 characters.</p>
-                    <p className="mt-1 text-sm text-gray-400">Signin through email is passwordless signin.</p>
-
-                </div>
-
-            </form>
-            <hr className="max-w-sm mx-auto my-2" />
-        </>
-    )
+SignIn.getInitialProps = async (context) => {
+    return {
+        providers: await providers(context),
+        csrfToken: await getCsrfToken(context)
+    }
 }

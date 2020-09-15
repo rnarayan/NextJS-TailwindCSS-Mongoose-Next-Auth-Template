@@ -5,8 +5,8 @@ import { useState } from 'react'
 import AccessDenied from '../accessdenied'
 
 const links = [
-  { href: "/", label: "Product" },
-  { href: "/", label: "Features" },
+  { href: "/users", label: "Users" },
+  { href: "/newuser", label: "Add User" },
   { href: "/", label: "Home" },
   { href: "/new", label: "Add Pet" },
 ]

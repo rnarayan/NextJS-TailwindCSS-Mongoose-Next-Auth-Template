@@ -33,7 +33,11 @@ const options = {
 
   allowSignin: async (user, account) => { return true },
 
-  // pages: { signin: '/auth/signin'},
+  pages: {
+    // signin: '/auth/signin'
+    error: '/auth/error',
+    verifyRequest: '/auth/verify-request',
+  },
 
   events: { signIn: async (message) => { console.log('Signin:', message) } },
 
