@@ -1,13 +1,14 @@
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
+import dbConnect from  '../../../utils/dbConnect'
 
 const options = {
   site: process.env.VERCEL_URL,
   providers: [
-    Providers.Email({
-      server: process.env.EMAIL_SERVER,
-      from: process.env.EMAIL_FROM,
-    }),
+    // Providers.Email({
+    //   server: process.env.EMAIL_SERVER,
+    //   from: process.env.EMAIL_FROM,
+    // }),
     Providers.Google({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET
@@ -21,11 +22,11 @@ const options = {
 
   // database: process.env.DATABASE_URL,
   // DATABASE_URL=sqlite://localhost/:memory:?synchronize=true
-  database: {
-    type: "mongodb",
-    useNewUrlParser: true,
-    url: process.env.DATABASE_URL,
-  },
+  // database: {
+  //   type: "mongodb",
+  //   useNewUrlParser: true,
+  //   url: process.env.DATABASE_URL,
+  // },
 
   session: { jwt: true },
 
@@ -49,19 +50,26 @@ const options = {
    * @return {boolean}         Return `true` (or a modified JWT) to allow sign in
    *                           Return `false` to deny access
    */
-    signIn: async (user, account, profile) => { return Promise.resolve(true) },
+    signIn: async (user, account, profile) => {
+      console.log('Nextauthjs line 53 signin callback')
+      // console.log('user:', user)
+      // console.log('account:', account)
+      // console.log('profile:', profile)
+      // await dbConnect();
+      // const result = await Usr.find({});
+      // console.log('result:',result)
+      return Promise.resolve(true)
+    },
 
     redirect: async (url, baseUrl) => { return Promise.resolve(baseUrl) },
 
     session: async (session, user, token) => {
       session.user.id = '12345'
-      console.log('nextauth.js session', session)
+      // console.log('nextauth.js session', session)
       return Promise.resolve(session)
     },
   }
 }
 const Auth = (req, res) => NextAuth(req, res, options)
-
-console.log('Pages:', options.pages)
 
 export default Auth

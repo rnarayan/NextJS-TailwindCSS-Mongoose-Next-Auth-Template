@@ -10,8 +10,7 @@ const links = [
 
 export default function Nav() {
   const [session, loading] = useSession()
-  console.log('session:',session)
-  console.log('Loading:',loading)
+
   return (
     <nav>
       <noscript>

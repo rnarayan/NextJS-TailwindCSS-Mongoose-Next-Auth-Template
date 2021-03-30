@@ -50,7 +50,6 @@ const UsrPage = ({ usr }) => {
           </div>
 
           <div className="btn-container">
-            {/* <Link href="users/[id]/edit" as={`users/${usr._id}/edit`}>  */}
             <Link href="/users/[id]/edit" as={`/users/${usr._id}/edit`}>
               <button className="btn edit">Edit</button>
             </Link>
