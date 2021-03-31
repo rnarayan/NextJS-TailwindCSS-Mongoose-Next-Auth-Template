@@ -7,7 +7,7 @@ export default function SignIn({ providers, csrfToken }) {
             <div className='font-bold text-center text-gray-600 text-lg py-2 px-1'>Custom Signin Page</div>
             {Object.values(providers).map(provider => (
                 <div key={provider.name}>
-                    {/* {provider.name == "Email" ? <EmailSignin csrfToken={csrfToken}/> : */}
+                    {provider.name == "Email" ? <EmailSignin csrfToken={csrfToken}/> :
                         <form>
                             <button
                                 className="flex justify-center items-center max-w-sm font-light hover:font-normal hover:bg-cool-gray-100 shadow-md appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight mx-auto" type="button"
@@ -18,7 +18,7 @@ export default function SignIn({ providers, csrfToken }) {
                                 <div>Sign in with {provider.name}</div>
                             </button>
                         </form>
-                    {/* } */}
+                    }
                 </div>
             ))}
         </div>

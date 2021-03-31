@@ -5,10 +5,10 @@ import dbConnect from  '../../../utils/dbConnect'
 const options = {
   site: process.env.VERCEL_URL,
   providers: [
-    // Providers.Email({
-    //   server: process.env.EMAIL_SERVER,
-    //   from: process.env.EMAIL_FROM,
-    // }),
+    Providers.Email({
+      server: process.env.EMAIL_SERVER,
+      from: process.env.EMAIL_FROM,
+    }),
     Providers.Google({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET
@@ -35,7 +35,7 @@ const options = {
   allowSignin: async (user, account) => { return true },
 
   pages: {
-    // signin: '/auth/signin'
+    signin: '/auth/signin',
     error: '/auth/error',
     verifyRequest: '/auth/verify-request',
   },
